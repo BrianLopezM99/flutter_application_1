@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/home/bloc/home_bloc.dart';
 
-import '../models/home_product_data_model.dart';
+import '../../home/models/home_product_data_model.dart';
+import '../bloc/cart_bloc.dart';
 
-class ProductTileWidget extends StatelessWidget {
+class CartTileWidget extends StatelessWidget {
   final ProductDataModel productDataModel;
-  final HomeBloc homeBloc;
-  const ProductTileWidget(
-      {super.key, required this.productDataModel, required this.homeBloc});
+  final CartBloc cartBloc;
+  const CartTileWidget(
+      {super.key, required this.productDataModel, required this.cartBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +51,14 @@ class ProductTileWidget extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                      onPressed: () {
-                        homeBloc.add(HomeProductWishlistButtonClickEvent(
-                            clickedProduct: productDataModel));
-                      },
+                      onPressed: () {},
                       icon: const Icon(Icons.favorite_border)),
                   IconButton(
                       onPressed: () {
-                        homeBloc.add(HomeProductCartButtonClickEvent(
-                            clickedProduct: productDataModel));
+                        cartBloc.add(CartRemoveFromCartEvent(
+                            productDataModel: productDataModel));
                       },
-                      icon: const Icon(Icons.shopping_bag_outlined))
+                      icon: const Icon(Icons.shopping_bag))
                 ],
               )
             ],
